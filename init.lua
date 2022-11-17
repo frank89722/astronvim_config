@@ -102,6 +102,7 @@ local config = {
                     }
                 end,
             },
+            { "kamykn/spelunker.vim" },
         },
         -- All other entries override the setup() call for default plugins
         ["null-ls"] = function(config)
@@ -243,6 +244,7 @@ local config = {
         set.relativenumber = true
         set.shiftwidth = 4 -- Number of space inserted for indentation
         set.tabstop = 4 -- Number of space in a tab
+
         -- Set key binding
         -- Set autocommands
         vim.api.nvim_create_augroup("packer_conf", { clear = true })
