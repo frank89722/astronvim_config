@@ -18,7 +18,7 @@ local config = {
     },
 
     -- Set colorscheme
-    colorscheme = "default_theme",
+    colorscheme = "monokai_ristretto",
 
     -- Override highlight groups in any theme
     highlights = {
@@ -103,6 +103,7 @@ local config = {
                 end,
             },
             { "kamykn/spelunker.vim" },
+            { "tanvirtin/monokai.nvim" },
         },
         -- All other entries override the setup() call for default plugins
         ["null-ls"] = function(config)
