@@ -98,7 +98,7 @@ local config = {
                 config = function()
                     require("im_select").setup {
                         default_im_select    = "com.apple.keylayout.UnicodeHexInput",
-                        disable_auto_restore = 0,
+                        disable_auto_restore = 1,
                     }
                 end,
             },
