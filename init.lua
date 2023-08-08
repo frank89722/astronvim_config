@@ -17,4 +17,19 @@ return {
     { "tanvirtin/monokai.nvim" },
   },
 
+  mappings = {
+    n = {
+      ["<c-j>"] = { ":m .+1<cr>==", desc = "n move line down" },
+      ["<c-k>"] = { ":m .-2<cr>==", desc = "n move line up" },
+    },
+    i = {
+      ["<c-j>"] = { "<esc>:m .+1<cr>==gi", desc = "i move line down" },
+      ["<c-k>"] = { "<esc>:m .-2<cr>==gi", desc = "i move line up" },
+    },
+    v = {
+      ["<c-j>"] = { ":m '>+1<cr>gv=gv", desc = "v move line down" },
+      ["<c-k>"] = { ":m '<-2<cr>gv=gv", desc = "v move line up" },
+    },
+  },
+
 }
