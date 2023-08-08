@@ -4,11 +4,10 @@ return {
   plugins = {
     {
       "keaising/im-select.nvim",
-      lazy = false,
+      event = "VeryLazy",
       config = function()
         require("im_select").setup {
           default_im_select    = "com.apple.keylayout.UnicodeHexInput",
-          disable_auto_restore = 1,
         }
       end,
     },
