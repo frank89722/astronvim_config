@@ -33,6 +33,14 @@ return {
     n = {
       ["<c-j>"] = { ":m .+1<cr>==", desc = "n move line down" },
       ["<c-k>"] = { ":m .-2<cr>==", desc = "n move line up" },
+      ["<S-l>"] = {
+        function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
+        desc = "Next buffer"
+      },
+      ["<S-h>"] = {
+        function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
+        desc = "Previous buffer",
+      },
     },
     i = {
       ["<c-j>"] = { "<esc>:m .+1<cr>==gi", desc = "i move line down" },
