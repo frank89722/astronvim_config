@@ -12,6 +12,18 @@ return {
         }
       end,
     },
+    {
+      "nvim-neo-tree/neo-tree.nvim",
+      config = function()
+        require("neo-tree").setup {
+          filesystem = {
+            filtered_items = {
+              visible = true,
+            }
+          }
+        }
+      end,
+    },
     { "chaoren/vim-wordmotion" },
     { "kamykn/spelunker.vim" },
     { "tanvirtin/monokai.nvim" },
