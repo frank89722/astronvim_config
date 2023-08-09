@@ -1,7 +1,16 @@
 return {
-  colorscheme = "monokai_ristretto",
+  colorscheme = "monokai-pro",
 
   plugins = {
+    {
+      "loctvl842/monokai-pro.nvim",
+      lazy = false,
+      config = function()
+        require("monokai-pro").setup({
+          filter = "ristretto"
+        })
+      end
+    },
     {
       "keaising/im-select.nvim",
       event = "VeryLazy",
@@ -25,7 +34,6 @@ return {
     },
     { "chaoren/vim-wordmotion" },
     { "kamykn/spelunker.vim" },
-    { "tanvirtin/monokai.nvim" },
     {
       "smoka7/multicursors.nvim",
       event = "VeryLazy",
