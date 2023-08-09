@@ -70,4 +70,10 @@ return {
     },
   },
 
+  options = {
+    opt = {
+      guicursor = "n-v-c-i:block",
+    },
+  }
+
 }
