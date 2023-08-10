@@ -6,9 +6,9 @@ return {
       "loctvl842/monokai-pro.nvim",
       lazy = false,
       config = function()
-        require("monokai-pro").setup({
+        require("monokai-pro").setup {
           filter = "ristretto"
-        })
+        }
       end
     },
     {
@@ -50,6 +50,18 @@ return {
         },
       },
     },
+    {
+      "jose-elias-alvarez/null-ls.nvim",
+      opts = function(_, opts)
+        local null_ls = require "null-ls"
+        opts.sources = {
+          null_ls.builtins.completion.spell,
+          null_ls.builtins.diagnostics.typos,
+        }
+        return opts
+      end,
+    },
+
   },
 
   mappings = {
