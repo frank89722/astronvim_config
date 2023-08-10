@@ -32,8 +32,6 @@ return {
         }
       end,
     },
-    { "chaoren/vim-wordmotion" },
-    { "kamykn/spelunker.vim" },
     {
       "smoka7/multicursors.nvim",
       event = "VeryLazy",
