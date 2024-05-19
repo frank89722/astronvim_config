@@ -61,13 +61,54 @@ return {
         return opts
       end,
     },
+    {
+      "gpanders/editorconfig.nvim",
+      lazy = false
+    },
+    {
+      "ThePrimeagen/refactoring.nvim",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-treesitter/nvim-treesitter",
+      },
+      lazy = false,
+      config = function()
+        require("refactoring").setup({
+          prompt_func_return_type = {
+              go = false,
+              java = false,
+
+              cpp = false,
+              c = false,
+              h = false,
+              hpp = false,
+              cxx = false,
+          },
+          prompt_func_param_type = {
+              go = false,
+              java = false,
+
+              cpp = false,
+              c = false,
+              h = false,
+              hpp = false,
+              cxx = false,
+          },
+          printf_statements = {},
+          print_var_statements = {},
+
+        })
+      end,
+    },
 
   },
 
   mappings = {
+
     n = {
       ["<C-S-j>"] = { ":m .+1<cr>==", desc = "n move line down" },
       ["<C-S-k>"] = { ":m .-2<cr>==", desc = "n move line up" },
+      ["<D-w>"] = { "<Nop>", silent=true },
       ["<S-l>"] = {
         function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
         desc = "Next buffer"
