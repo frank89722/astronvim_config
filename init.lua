@@ -1,137 +1,19 @@
-return {
-  colorscheme = "monokai-pro",
+-- This file simply bootstraps the installation of Lazy.nvim and then calls other files for execution
+-- This file doesn't necessarily need to be touched, BE CAUTIOUS editing this file and proceed at your own risk.
+local lazypath = vim.env.LAZY or vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+if not (vim.env.LAZY or (vim.uv or vim.loop).fs_stat(lazypath)) then
+  -- stylua: ignore
+  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
+end
+vim.opt.rtp:prepend(lazypath)
 
-  plugins = {
-    {
-      "loctvl842/monokai-pro.nvim",
-      lazy = false,
-      config = function()
-        require("monokai-pro").setup {
-          filter = "ristretto"
-        }
-      end
-    },
-    {
-      "keaising/im-select.nvim",
-      event = "VeryLazy",
-      config = function()
-        require("im_select").setup {
-          default_im_select = "com.apple.keylayout.UnicodeHexInput",
-        }
-      end,
-    },
-    {
-      "nvim-neo-tree/neo-tree.nvim",
-      config = function()
-        require("neo-tree").setup {
-          filesystem = {
-            filtered_items = {
-              visible = true,
-            }
-          }
-        }
-      end,
-    },
-    {
-      "smoka7/multicursors.nvim",
-      event = "VeryLazy",
-      dependencies = {
-        'nvim-treesitter/nvim-treesitter',
-        'smoka7/hydra.nvim',
-      },
-      opts = {},
-      cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
-      keys = {
-        {
-          mode = { 'v', 'n' },
-          '<A-n>',
-          '<cmd>MCstart<cr>',
-          desc = 'Create a selection for selected text or word under the cursor',
-        },
-      },
-    },
-    {
-      "jose-elias-alvarez/null-ls.nvim",
-      opts = function(_, opts)
-        local null_ls = require "null-ls"
-        opts.sources = {
-          null_ls.builtins.completion.spell,
-          null_ls.builtins.diagnostics.typos,
-        }
-        return opts
-      end,
-    },
-    {
-      "gpanders/editorconfig.nvim",
-      lazy = false
-    },
-    {
-      "ThePrimeagen/refactoring.nvim",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-treesitter/nvim-treesitter",
-      },
-      lazy = false,
-      config = function()
-        require("refactoring").setup({
-          prompt_func_return_type = {
-              go = false,
-              java = false,
+-- validate that lazy is available
+if not pcall(require, "lazy") then
+  -- stylua: ignore
+  vim.api.nvim_echo({ { ("Unable to load lazy from: %s\n"):format(lazypath), "ErrorMsg" }, { "Press any key to exit...", "MoreMsg" } }, true, {})
+  vim.fn.getchar()
+  vim.cmd.quit()
+end
 
-              cpp = false,
-              c = false,
-              h = false,
-              hpp = false,
-              cxx = false,
-          },
-          prompt_func_param_type = {
-              go = false,
-              java = false,
-
-              cpp = false,
-              c = false,
-              h = false,
-              hpp = false,
-              cxx = false,
-          },
-          printf_statements = {},
-          print_var_statements = {},
-
-        })
-      end,
-    },
-
-  },
-
-  mappings = {
-
-    n = {
-      ["<C-S-j>"] = { ":m .+1<cr>==", desc = "n move line down" },
-      ["<C-S-k>"] = { ":m .-2<cr>==", desc = "n move line up" },
-      ["<D-w>"] = { "<Nop>", silent=true },
-      ["<S-l>"] = {
-        function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
-        desc = "Next buffer"
-      },
-      ["<S-h>"] = {
-        function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
-        desc = "Previous buffer",
-      },
-    },
-    i = {
-      ["<C-S-j>"] = { "<esc>:m .+1<cr>==gi", desc = "i move line down" },
-      ["<C-S-k>"] = { "<esc>:m .-2<cr>==gi", desc = "i move line up" },
-    },
-    v = {
-      ["<C-S-j>"] = { ":m '>+1<cr>gv=gv", desc = "v move line down" },
-      ["<C-S-k>"] = { ":m '<-2<cr>gv=gv", desc = "v move line up" },
-    },
-  },
-
-  options = {
-    opt = {
-      guicursor = "n-v-c-i:block",
-    },
-  }
-
-}
+require "lazy_setup"
+require "polish"
